@@ -26,13 +26,13 @@ os arquivos exatos.
 
 ### 1. Preparação do monorepositório
 
-- [ ] T001 Criar npm workspaces e scripts raiz `dev`, `build`, `test`, `lint` e `typecheck` em `package.json`
-- [ ] T002 [P] Criar configuração de ignorados para dependências, builds, `.env` e temporários em `.gitignore`
-- [ ] T003 [P] Criar placeholders sem segredos para backend, origem, limites e rate limit em `.env.example`
-- [ ] T004 Criar o workspace Angular 22 standalone em `frontend/package.json`, `frontend/angular.json`, `frontend/tsconfig.json` e `frontend/src/`
-- [ ] T005 Criar o workspace Express/TypeScript em `backend/package.json`, `backend/tsconfig.json`, `backend/src/` e `backend/tests/`
-- [ ] T006 [P] Configurar lint e formatação compartilhados em `eslint.config.js` e `.prettierignore`
-- [ ] T007 Verificar instalação e scripts vazios dos dois workspaces por `package-lock.json` e `package.json`
+- [X] T001 Criar npm workspaces e scripts raiz `dev`, `build`, `test`, `lint` e `typecheck` em `package.json`
+- [X] T002 [P] Criar configuração de ignorados para dependências, builds, `.env` e temporários em `.gitignore`
+- [X] T003 [P] Criar placeholders sem segredos para backend, origem, limites e rate limit em `.env.example`
+- [X] T004 Criar o workspace Angular 22 standalone em `frontend/package.json`, `frontend/angular.json`, `frontend/tsconfig.json` e `frontend/src/`
+- [X] T005 Criar o workspace Express/TypeScript em `backend/package.json`, `backend/tsconfig.json`, `backend/src/` e `backend/tests/`
+- [X] T006 [P] Configurar lint e formatação compartilhados em `eslint.config.js` e `.prettierignore`
+- [X] T007 Verificar instalação e scripts vazios dos dois workspaces por `package-lock.json` e `package.json`
 
 **Checkpoint**: `npm install` funciona na raiz e os dois workspaces são reconhecidos.
 
@@ -47,33 +47,33 @@ todas as histórias.
 
 ### 2. Configuração do backend
 
-- [ ] T008 [P] Criar schema testável de variáveis de ambiente em `backend/src/config/env.ts`
-- [ ] T009 Criar bootstrap sem rotas de negócio em `backend/src/app.ts` e `backend/src/server.ts`
-- [ ] T010 [P] Criar testes do envelope e mapeamento de erros conhecidos/desconhecidos em `backend/tests/unit/errors/error-middleware.spec.ts`
-- [ ] T011 Implementar `AppError` e middleware centralizado redigido em `backend/src/errors/app-error.ts` e `backend/src/middlewares/error.middleware.ts`
-- [ ] T012 [P] Implementar request ID e logger estruturado sem conteúdo documental em `backend/src/middlewares/request-id.middleware.ts` e `backend/src/logging/logger.ts`
+- [X] T008 [P] Criar schema testável de variáveis de ambiente em `backend/src/config/env.ts`
+- [X] T009 Criar bootstrap sem rotas de negócio em `backend/src/app.ts` e `backend/src/server.ts`
+- [X] T010 [P] Criar testes do envelope e mapeamento de erros conhecidos/desconhecidos em `backend/tests/unit/errors/error-middleware.spec.ts`
+- [X] T011 Implementar `AppError` e middleware centralizado redigido em `backend/src/errors/app-error.ts` e `backend/src/middlewares/error.middleware.ts`
+- [X] T012 [P] Implementar request ID e logger estruturado sem conteúdo documental em `backend/src/middlewares/request-id.middleware.ts` e `backend/src/logging/logger.ts`
 
 ### 3. Contrato e schemas
 
-- [ ] T013 [P] Copiar e adaptar os tipos aprovados para o pacote compartilhado em `contracts/analysis.ts`
-- [ ] T014 [P] Criar testes dos schemas de regra, resultado, erros, IDs, enums, campos nulos e totais em `backend/tests/unit/schemas/analysis.schema.spec.ts`
-- [ ] T015 Implementar schemas Zod e refinamentos semânticos do contrato em `backend/src/schemas/analysis.schema.ts`
-- [ ] T016 [P] Criar testes do schema de upload para formatos, MIME, extensão, tamanho e arquivo vazio em `backend/tests/unit/schemas/upload.schema.spec.ts`
-- [ ] T017 Implementar schema e constantes de upload configurável em `backend/src/schemas/upload.schema.ts`
+- [X] T013 [P] Copiar e adaptar os tipos aprovados para o pacote compartilhado em `contracts/analysis.ts`
+- [X] T014 [P] Criar testes dos schemas de regra, resultado, erros, IDs, enums, campos nulos e totais em `backend/tests/unit/schemas/analysis.schema.spec.ts`
+- [X] T015 Implementar schemas Zod e refinamentos semânticos do contrato em `backend/src/schemas/analysis.schema.ts`
+- [X] T016 [P] Criar testes do schema de upload para formatos, MIME, extensão, tamanho e arquivo vazio em `backend/tests/unit/schemas/upload.schema.spec.ts`
+- [X] T017 Implementar schema e constantes de upload configurável em `backend/src/schemas/upload.schema.ts`
 
 ### 12. Segurança basal
 
-- [ ] T018 [P] Criar testes de CORS restrito, headers e limite de requisições em `backend/tests/integration/security.middleware.spec.ts`
-- [ ] T019 Implementar Helmet, CORS por `FRONTEND_ORIGIN` e rate limit configurável em `backend/src/middlewares/security.middleware.ts` e `backend/src/middlewares/rate-limit.middleware.ts`
-- [ ] T020 [P] Criar teste de redaction que proíbe chave, texto, evidência, prompt e resposta bruta nos logs em `backend/tests/unit/logging/logger.spec.ts`
-- [ ] T021 Ajustar campos permitidos e redaction do logger conforme T020 em `backend/src/logging/logger.ts`
+- [X] T018 [P] Criar testes de CORS restrito, headers e limite de requisições em `backend/tests/integration/security.middleware.spec.ts`
+- [X] T019 Implementar Helmet, CORS por `FRONTEND_ORIGIN` e rate limit configurável em `backend/src/middlewares/security.middleware.ts` e `backend/src/middlewares/rate-limit.middleware.ts`
+- [X] T020 [P] Criar teste de redaction que proíbe chave, texto, evidência, prompt e resposta bruta nos logs em `backend/tests/unit/logging/logger.spec.ts`
+- [X] T021 Ajustar campos permitidos e redaction do logger conforme T020 em `backend/src/logging/logger.ts`
 
 ### 7. Estrutura Angular
 
-- [ ] T022 [P] Configurar bootstrap standalone, HttpClient e interceptor funcional em `frontend/src/app/app.config.ts` e `frontend/src/app/core/interceptors/api-error.interceptor.ts`
-- [ ] T023 Configurar rotas e shells compiláveis para `/upload`, `/resultado`, redirect e fallback em `frontend/src/app/app.routes.ts`, `frontend/src/app/app.component.ts`, `frontend/src/app/features/upload/upload-page.component.ts` e `frontend/src/app/features/result/result-page.component.ts`
-- [ ] T024 [P] Configurar proxy `/api/**` e scripts de desenvolvimento em `frontend/proxy.conf.json` e `frontend/angular.json`
-- [ ] T025 Criar store efêmero com signals para arquivo, status, resultado, erro e filtro em `frontend/src/app/core/state/analysis.store.ts`
+- [X] T022 [P] Configurar bootstrap standalone, HttpClient e interceptor funcional em `frontend/src/app/app.config.ts` e `frontend/src/app/core/interceptors/api-error.interceptor.ts`
+- [X] T023 Configurar rotas e shells compiláveis para `/upload`, `/resultado`, redirect e fallback em `frontend/src/app/app.routes.ts`, `frontend/src/app/app.component.ts`, `frontend/src/app/features/upload/upload-page.component.ts` e `frontend/src/app/features/result/result-page.component.ts`
+- [X] T024 [P] Configurar proxy `/api/**` e scripts de desenvolvimento em `frontend/proxy.conf.json` e `frontend/angular.json`
+- [X] T025 Criar store efêmero com signals para arquivo, status, resultado, erro e filtro em `frontend/src/app/core/state/analysis.store.ts`
 
 **Checkpoint**: Backend inicia com middleware basal; frontend abre e redireciona para `/upload`;
 contratos compilam nos dois workspaces.

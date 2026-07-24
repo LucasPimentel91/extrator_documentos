@@ -1,0 +1,30 @@
+{
+  "name": "analisador-regras-institucionais",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "engines": {
+    "node": ">=24.15.0",
+    "npm": ">=11"
+  },
+  "scripts": {
+    "dev": "concurrently --kill-others-on-fail --names frontend,backend \"npm run start --workspace frontend\" \"npm run dev --workspace backend\"",
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "typecheck": "tsc -p tsconfig.contracts.json --noEmit && npm run typecheck --workspaces --if-present"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.31.0",
+    "angular-eslint": "^22.0.0",
+    "concurrently": "^9.2.0",
+    "eslint": "^9.31.0",
+    "globals": "^16.3.0",
+    "prettier": "^3.6.2",
+    "typescript-eslint": "^8.38.0"
+  }
+}
