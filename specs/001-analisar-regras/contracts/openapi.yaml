@@ -34,24 +34,83 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AnalysisResult"
+              examples:
+                withRules:
+                  summary: Documento com uma obrigação
+                  value:
+                    document:
+                      name: norma.txt
+                      type: text/plain
+                      characters: 42
+                    summary:
+                      totalRules: 1
+                      requiresHumanReview: true
+                    rules:
+                      - id: R001
+                        title: Entrega de relatório
+                        description: O setor deve entregar o relatório mensal.
+                        type: obligation
+                        evidence: O setor deverá entregar o relatório mensal.
+                        location:
+                          page: null
+                          section: Art. 5º
+                        subject: O setor
+                        action: Entregar o relatório mensal
+                        deadline: null
+                        condition: null
+                        exception: null
+                        confidence: high
+                        requiresHumanReview: true
+                withoutRules:
+                  summary: Documento sem regras identificadas
+                  value:
+                    document:
+                      name: informativo.txt
+                      type: text/plain
+                      characters: 20
+                    summary:
+                      totalRules: 0
+                      requiresHumanReview: true
+                    rules: []
         "400":
           description: Arquivo ausente, vazio ou de tipo inválido
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                invalidFile:
+                  value:
+                    error:
+                      code: INVALID_FILE_TYPE
+                      message: Formato de arquivo inválido.
+                      requestId: req-example-400
         "413":
           description: Arquivo acima do limite vigente
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                fileTooLarge:
+                  value:
+                    error:
+                      code: FILE_TOO_LARGE
+                      message: O arquivo excede o limite permitido.
+                      requestId: req-example-413
         "422":
           description: Documento sem texto legível
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                unreadable:
+                  value:
+                    error:
+                      code: DOCUMENT_UNREADABLE
+                      message: Não foi possível ler o documento.
+                      requestId: req-example-422
         "429":
           description: Limite de requisições excedido
           headers:
@@ -62,30 +121,65 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                rateLimited:
+                  value:
+                    error:
+                      code: RATE_LIMITED
+                      message: Muitas solicitações. Tente novamente mais tarde.
+                      requestId: req-example-429
         "502":
           description: Resposta inválida do serviço de análise
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                invalidAiResponse:
+                  value:
+                    error:
+                      code: AI_INVALID_RESPONSE
+                      message: O serviço retornou uma resposta inválida.
+                      requestId: req-example-502
         "503":
           description: Serviço de análise temporariamente indisponível
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                aiUnavailable:
+                  value:
+                    error:
+                      code: AI_UNAVAILABLE
+                      message: O serviço de análise está temporariamente indisponível.
+                      requestId: req-example-503
         "504":
           description: Serviço de análise excedeu 120 segundos
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                aiTimeout:
+                  value:
+                    error:
+                      code: AI_TIMEOUT
+                      message: A análise excedeu o tempo limite.
+                      requestId: req-example-504
         "500":
           description: Falha interna não classificada
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                internal:
+                  value:
+                    error:
+                      code: INTERNAL_ERROR
+                      message: Ocorreu um erro interno.
+                      requestId: req-example-500
 components:
   schemas:
     AnalysisResult:

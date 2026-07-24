@@ -34,11 +34,32 @@ export class AnalysisStore {
   readonly error = this.errorState.asReadonly();
   readonly filter = this.filterState.asReadonly();
   readonly hasResult = computed(() => this.resultState() !== null);
+  readonly totalRules = computed(
+    () => this.resultState()?.summary.totalRules ?? 0,
+  );
+  readonly filteredRules = computed(() => {
+    const rules = this.resultState()?.rules ?? [];
+    const filter = this.filterState();
+    return filter === "all"
+      ? rules
+      : rules.filter((rule) => rule.type === filter);
+  });
+  readonly filteredTotal = computed(() => this.filteredRules().length);
 
   selectFile(file: File): void {
     this.selectedFileState.set(file);
     this.statusState.set("file-selected");
+    this.resultState.set(null);
     this.errorState.set(null);
+    this.filterState.set("all");
+  }
+
+  clearSelection(): void {
+    this.selectedFileState.set(null);
+    this.statusState.set("empty");
+    this.resultState.set(null);
+    this.errorState.set(null);
+    this.filterState.set("all");
   }
 
   setStatus(status: AnalysisStatus): void {
@@ -47,12 +68,15 @@ export class AnalysisStore {
 
   setResult(result: AnalysisResult): void {
     this.resultState.set(result);
+    this.filterState.set("all");
     this.statusState.set("completed");
     this.errorState.set(null);
   }
 
   setError(error: AnalysisApiError): void {
     this.errorState.set(error);
+    this.resultState.set(null);
+    this.filterState.set("all");
     this.statusState.set("failed");
   }
 
@@ -60,12 +84,19 @@ export class AnalysisStore {
     this.filterState.set(filter);
   }
 
-  async reset(): Promise<void> {
-    this.selectedFileState.set(null);
-    this.statusState.set("empty");
+  prepareRetry(): boolean {
+    if (this.statusState() !== "failed" || !this.selectedFileState()) {
+      return false;
+    }
     this.resultState.set(null);
     this.errorState.set(null);
     this.filterState.set("all");
+    this.statusState.set("ready");
+    return true;
+  }
+
+  async reset(): Promise<void> {
+    this.clearSelection();
     await this.router.navigate(["/upload"]);
   }
 }

@@ -172,11 +172,11 @@ total geral e ausência de nova requisição.
 
 ### 9. Tela de resultado — filtros, testes primeiro
 
-- [ ] T066 [P] [US3] Criar testes do store para nove tipos, todos, zero correspondências e total derivado em `frontend/src/app/core/state/analysis.store.spec.ts`
-- [ ] T067 [P] [US3] Criar testes de teclado e rótulos do filtro em `frontend/src/app/features/result/rule-filter.component.spec.ts`
-- [ ] T068 [US3] Implementar filtro e regras derivadas com `computed` no store em `frontend/src/app/core/state/analysis.store.ts`
-- [ ] T069 [P] [US3] Implementar controle acessível de categoria em `frontend/src/app/features/result/rule-filter.component.ts`
-- [ ] T070 [US3] Integrar filtro, contagem filtrada e estado vazio à página em `frontend/src/app/features/result/result-page.component.ts`
+- [X] T066 [P] [US3] Criar testes do store para nove tipos, todos, zero correspondências e total derivado em `frontend/src/app/core/state/analysis.store.spec.ts`
+- [X] T067 [P] [US3] Criar testes de teclado e rótulos do filtro em `frontend/src/app/features/result/rule-filter.component.spec.ts`
+- [X] T068 [US3] Implementar filtro e regras derivadas com `computed` no store em `frontend/src/app/core/state/analysis.store.ts`
+- [X] T069 [P] [US3] Implementar controle acessível de categoria em `frontend/src/app/features/result/rule-filter.component.ts`
+- [X] T070 [US3] Integrar filtro, contagem filtrada e estado vazio à página em `frontend/src/app/features/result/result-page.component.ts`
 
 **Checkpoint**: US3 filtra sem rede ou mutação do resultado original.
 
@@ -191,12 +191,12 @@ retornar vazio a `/upload` em até duas ações.
 
 ### 8 e 10. Recuperação frontend-backend — testes primeiro
 
-- [ ] T071 [P] [US4] Criar testes de UI para arquivo inválido, excesso, leitura, IA temporária e timeout em `frontend/src/app/features/upload/upload-errors.spec.ts`
-- [ ] T072 [P] [US4] Criar testes do store para retry, limpeza completa e analisar outro documento em `frontend/src/app/core/state/analysis-recovery.spec.ts`
-- [ ] T073 [P] [US4] Criar teste de ciclo de vida que comprova liberação de buffer/texto em sucesso e falha em `backend/tests/integration/document-disposal.spec.ts`
-- [ ] T074 [US4] Implementar mensagens e ações de recuperação por código de erro em `frontend/src/app/features/upload/upload-page.component.ts`
-- [ ] T075 [US4] Implementar retry controlado, reset e ação “analisar outro” no store e resultado em `frontend/src/app/core/state/analysis.store.ts` e `frontend/src/app/features/result/result-page.component.ts`
-- [ ] T076 [US4] Garantir descarte de referências temporárias em todos os caminhos em `backend/src/services/document-analysis.service.ts`
+- [X] T071 [P] [US4] Criar testes de UI para arquivo inválido, excesso, leitura, IA temporária e timeout em `frontend/src/app/features/upload/upload-errors.spec.ts`
+- [X] T072 [P] [US4] Criar testes do store para retry, limpeza completa e analisar outro documento em `frontend/src/app/core/state/analysis-recovery.spec.ts`
+- [X] T073 [P] [US4] Criar teste de ciclo de vida que comprova liberação de buffer/texto em sucesso e falha em `backend/tests/integration/document-disposal.spec.ts`
+- [X] T074 [US4] Implementar mensagens e ações de recuperação por código de erro em `frontend/src/app/features/upload/upload-page.component.ts`
+- [X] T075 [US4] Implementar retry controlado, reset e ação “analisar outro” no store e resultado em `frontend/src/app/core/state/analysis.store.ts` e `frontend/src/app/features/result/result-page.component.ts`
+- [X] T076 [US4] Garantir descarte de referências temporárias em todos os caminhos em `backend/src/services/document-analysis.service.ts`
 
 **Checkpoint**: US4 fecha todos os estados de falha sem persistir documento ou prender o usuário.
 
@@ -227,24 +227,24 @@ retornar vazio a `/upload` em até duas ações.
 
 ### 11. Testes
 
-- [ ] T077 [P] Criar teste básico do fluxo Angular upload → progresso → resultado → filtro → reinício em `frontend/src/app/app-flow.spec.ts`
-- [ ] T078 [P] Criar testes responsivos e de teclado para 320, 768 e 1440 px em `frontend/src/app/accessibility-flow.spec.ts`
-- [ ] T079 [P] Criar verificação de compatibilidade entre schema Zod, tipos e exemplos OpenAPI em `backend/tests/contract/analysis-contract.spec.ts`
-- [ ] T080 Executar e corrigir somente falhas do escopo em `frontend/`, `backend/`, `contracts/` via `npm test`, `npm run typecheck`, `npm run lint` e `npm run build`
+- [X] T077 [P] Criar teste básico do fluxo Angular upload → progresso → resultado → filtro → reinício em `frontend/src/app/app-flow.spec.ts`
+- [X] T078 [P] Criar testes responsivos e de teclado para 320, 768 e 1440 px em `frontend/src/app/accessibility-flow.spec.ts`
+- [X] T079 [P] Criar verificação de compatibilidade entre schema Zod, tipos e exemplos OpenAPI em `backend/tests/contract/analysis-contract.spec.ts`
+- [X] T080 Executar e corrigir somente falhas do escopo em `frontend/`, `backend/`, `contracts/` via `npm test`, `npm run typecheck`, `npm run lint` e `npm run build`
 
 ### 12. Segurança
 
-- [ ] T081 [P] Criar teste de regressão que procura segredos e conteúdo único nos logs de sucesso/falha em `backend/tests/integration/log-privacy.spec.ts`
-- [ ] T082 [P] Criar teste de abuso combinado para rate limit, arquivo grande e prompt injection em `backend/tests/integration/security-regression.spec.ts`
-- [ ] T083 Revisar e ajustar CORS, headers, rate limit, redaction e não persistência em `backend/src/app.ts`, `backend/src/middlewares/security.middleware.ts`, `backend/src/logging/logger.ts` e `backend/src/services/document-analysis.service.ts`
+- [X] T081 [P] Criar teste de regressão que procura segredos e conteúdo único nos logs de sucesso/falha em `backend/tests/integration/log-privacy.spec.ts`
+- [X] T082 [P] Criar teste de abuso combinado para rate limit, arquivo grande e prompt injection em `backend/tests/integration/security-regression.spec.ts`
+- [X] T083 Revisar e ajustar CORS, headers, rate limit, redaction e não persistência em `backend/src/app.ts`, `backend/src/middlewares/security.middleware.ts`, `backend/src/logging/logger.ts` e `backend/src/services/document-analysis.service.ts`
 
 ### 13. Documentação
 
-- [ ] T084 [P] Documentar instalação, scripts, arquitetura, portas, proxy e limites do MVP em `README.md`
-- [ ] T085 [P] Documentar todas as variáveis sem valores reais e política de segredos em `.env.example`
-- [ ] T086 [P] Sincronizar exemplos finais e códigos de erro no contrato em `specs/001-analisar-regras/contracts/openapi.yaml`
-- [ ] T087 Validar todos os cenários executáveis e registrar resultados em `specs/001-analisar-regras/quickstart.md`
-- [ ] T088 Registrar matriz final requisito → história → tarefa → código → teste em `specs/001-analisar-regras/traceability.md`
+- [X] T084 [P] Documentar instalação, scripts, arquitetura, portas, proxy e limites do MVP em `README.md`
+- [X] T085 [P] Documentar todas as variáveis sem valores reais e política de segredos em `.env.example`
+- [X] T086 [P] Sincronizar exemplos finais e códigos de erro no contrato em `specs/001-analisar-regras/contracts/openapi.yaml`
+- [X] T087 Validar todos os cenários executáveis e registrar resultados em `specs/001-analisar-regras/quickstart.md`
+- [X] T088 Registrar matriz final requisito → história → tarefa → código → teste em `specs/001-analisar-regras/traceability.md`
 
 ---
 

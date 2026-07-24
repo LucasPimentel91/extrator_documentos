@@ -18,6 +18,28 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
       />
     </label>
   `,
+  styles: `
+    .drop-zone {
+      box-sizing: border-box;
+      display: grid;
+      gap: 0.75rem;
+      width: 100%;
+      padding: 1.25rem;
+      border: 2px dashed #64748b;
+      border-radius: 0.75rem;
+      cursor: pointer;
+    }
+
+    .drop-zone:focus-within {
+      outline: 0.2rem solid #2563eb;
+      outline-offset: 0.2rem;
+    }
+
+    input {
+      max-width: 100%;
+      min-height: 2.75rem;
+    }
+  `,
 })
 export class FileUploadComponent {
   @Input() disabled = false;

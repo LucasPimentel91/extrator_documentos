@@ -7,6 +7,7 @@ import {
 } from "./adapters/gemini-rule-analyzer.js";
 import type { RuleAnalyzer } from "./adapters/rule-analyzer.js";
 import { AppError } from "./errors/app-error.js";
+import { logger } from "./logging/logger.js";
 import { errorMiddleware } from "./middlewares/error.middleware.js";
 import { createRateLimitMiddleware } from "./middlewares/rate-limit.middleware.js";
 import { requestIdMiddleware } from "./middlewares/request-id.middleware.js";
@@ -29,6 +30,17 @@ export function createApp(options: AppOptions = {}): Express {
 
   app.disable("x-powered-by");
   app.use(requestIdMiddleware);
+  app.use((_request, response, next) => {
+    const startedAt = Date.now();
+    response.on("finish", () => {
+      logger.info("request_completed", {
+        requestId: response.locals.requestId,
+        status: response.statusCode,
+        durationMs: Date.now() - startedAt,
+      });
+    });
+    next();
+  });
   app.use(
     ...securityMiddleware(
       options.frontendOrigin ?? environment.FRONTEND_ORIGIN,

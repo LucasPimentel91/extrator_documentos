@@ -62,4 +62,63 @@ describe("ResultPageComponent", () => {
 
     expect(navigate).toHaveBeenCalledWith(["/upload"]);
   });
+
+  it("filters cards locally and keeps the overall count visible", () => {
+    const store = TestBed.inject(AnalysisStore);
+    store.setResult({
+      ...result,
+      summary: { ...result.summary, totalRules: 2 },
+      rules: [
+        result.rules[0],
+        {
+          ...result.rules[0],
+          id: "R002",
+          title: "Conduta proibida",
+          type: "prohibition",
+        },
+      ],
+    });
+    const fixture = TestBed.createComponent(ResultPageComponent);
+    fixture.detectChanges();
+    const select = fixture.nativeElement.querySelector("select") as HTMLSelectElement;
+
+    select.value = "prohibition";
+    select.dispatchEvent(new Event("change"));
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelectorAll("app-rule-card")).toHaveLength(1);
+    expect(fixture.nativeElement.textContent).toContain("Exibindo 1 de 2 regras");
+
+    select.value = "permission";
+    select.dispatchEvent(new Event("change"));
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelectorAll("app-rule-card")).toHaveLength(0);
+    expect(fixture.nativeElement.querySelector("[data-testid='no-filter-results']").textContent)
+      .toContain("Nenhuma regra corresponde");
+    expect(fixture.nativeElement.textContent).toContain("2 regras identificadas");
+  });
+
+  it("clears the completed analysis when choosing another document", async () => {
+    const store = TestBed.inject(AnalysisStore);
+    const navigate = vi
+      .spyOn(TestBed.inject(Router), "navigate")
+      .mockResolvedValue(true);
+    store.selectFile(new File(["x"], "regulamento.pdf"));
+    store.setResult(result);
+    const fixture = TestBed.createComponent(ResultPageComponent);
+    fixture.detectChanges();
+
+    const button = [...fixture.nativeElement.querySelectorAll("button")].find(
+      (candidate: HTMLButtonElement) =>
+        candidate.textContent?.includes("Analisar outro documento"),
+    ) as HTMLButtonElement;
+    button.click();
+    await fixture.whenStable();
+
+    expect(store.selectedFile()).toBeNull();
+    expect(store.result()).toBeNull();
+    expect(store.status()).toBe("empty");
+    expect(navigate).toHaveBeenCalledWith(["/upload"]);
+  });
 });

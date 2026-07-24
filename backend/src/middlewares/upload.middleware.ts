@@ -79,6 +79,7 @@ export function createUploadMiddleware(maxFileSizeBytes: number): RequestHandler
         extension as keyof typeof ALLOWED_UPLOAD_TYPES
       ]
     ) {
+      request.file.buffer.fill(0);
       next(
         new AppError(
           request.file.size === 0 ? "EMPTY_FILE" : "INVALID_FILE_TYPE",
