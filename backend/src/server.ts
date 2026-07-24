@@ -5,6 +5,6 @@ import { logger } from "./logging/logger.js";
 const environment = parseEnvironment();
 const app = createApp();
 
-app.listen(environment.PORT, () => {
+app.listen(environment.BACKEND_PORT, () => {
   logger.info("server_started", { status: 200 });
 });

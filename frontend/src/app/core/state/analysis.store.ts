@@ -19,6 +19,51 @@ export type AnalysisStatus =
 
 export type RuleFilter = RuleType | "all";
 
+const ANALYSIS_RESULT_STORAGE_KEY = "analysis:last-result";
+
+function clearStoredResult(): void {
+  try {
+    globalThis.sessionStorage?.removeItem(ANALYSIS_RESULT_STORAGE_KEY);
+  } catch {
+    // Browsers can deny sessionStorage; nothing else is required.
+  }
+}
+
+function readStoredResult(): AnalysisResult | null {
+  try {
+    const raw = globalThis.sessionStorage?.getItem(ANALYSIS_RESULT_STORAGE_KEY);
+    if (!raw) return null;
+
+    const parsed = JSON.parse(raw) as Partial<AnalysisResult>;
+    if (
+      typeof parsed === "object" &&
+      parsed !== null &&
+      typeof parsed.document?.name === "string" &&
+      typeof parsed.document?.type === "string" &&
+      typeof parsed.document?.characters === "number" &&
+      typeof parsed.summary?.totalRules === "number" &&
+      typeof parsed.summary?.requiresHumanReview === "boolean" &&
+      Array.isArray(parsed.rules)
+    ) {
+      return parsed as AnalysisResult;
+    }
+  } catch {
+    clearStoredResult();
+  }
+  return null;
+}
+
+function writeStoredResult(result: AnalysisResult): void {
+  try {
+    globalThis.sessionStorage?.setItem(
+      ANALYSIS_RESULT_STORAGE_KEY,
+      JSON.stringify(result),
+    );
+  } catch {
+    // Browsers can deny sessionStorage; in-memory state still works.
+  }
+}
+
 @Injectable({ providedIn: "root" })
 export class AnalysisStore {
   private readonly router = inject(Router);
@@ -46,12 +91,21 @@ export class AnalysisStore {
   });
   readonly filteredTotal = computed(() => this.filteredRules().length);
 
+  constructor() {
+    const storedResult = readStoredResult();
+    if (storedResult) {
+      this.resultState.set(storedResult);
+      this.statusState.set("completed");
+    }
+  }
+
   selectFile(file: File): void {
     this.selectedFileState.set(file);
     this.statusState.set("file-selected");
     this.resultState.set(null);
     this.errorState.set(null);
     this.filterState.set("all");
+    clearStoredResult();
   }
 
   clearSelection(): void {
@@ -60,6 +114,7 @@ export class AnalysisStore {
     this.resultState.set(null);
     this.errorState.set(null);
     this.filterState.set("all");
+    clearStoredResult();
   }
 
   setStatus(status: AnalysisStatus): void {
@@ -71,6 +126,7 @@ export class AnalysisStore {
     this.filterState.set("all");
     this.statusState.set("completed");
     this.errorState.set(null);
+    writeStoredResult(result);
   }
 
   setError(error: AnalysisApiError): void {
@@ -78,6 +134,7 @@ export class AnalysisStore {
     this.resultState.set(null);
     this.filterState.set("all");
     this.statusState.set("failed");
+    clearStoredResult();
   }
 
   setFilter(filter: RuleFilter): void {
@@ -92,6 +149,7 @@ export class AnalysisStore {
     this.errorState.set(null);
     this.filterState.set("all");
     this.statusState.set("ready");
+    clearStoredResult();
     return true;
   }
 

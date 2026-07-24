@@ -13,9 +13,9 @@ function rule(type: RuleType, index: number): ExtractedRule {
   return {
     id: `R${String(index + 1).padStart(3, "0")}`,
     title: `Regra ${type}`,
-    description: `DescriÃ§Ã£o ${type}`,
+    description: `Descrição ${type}`,
     type,
-    evidence: `EvidÃªncia ${type}`,
+    evidence: `Evidência ${type}`,
     location: { page: index + 1, section: null },
     subject: null,
     action: null,
@@ -44,6 +44,7 @@ describe("AnalysisStore result filtering", () => {
   let store: AnalysisStore;
 
   beforeEach(() => {
+    sessionStorage.clear();
     TestBed.configureTestingModule({
       providers: [provideRouter([])],
     });
@@ -88,5 +89,32 @@ describe("AnalysisStore result filtering", () => {
     expect(store.filteredRules()).toEqual([]);
     expect(store.filteredTotal()).toBe(0);
     expect(store.totalRules()).toBe(0);
+  });
+
+  it("restores the last completed result from session storage", () => {
+    store.setResult(mixedResult);
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({
+      providers: [provideRouter([])],
+    });
+
+    const restored = TestBed.inject(AnalysisStore);
+
+    expect(restored.status()).toBe("completed");
+    expect(restored.result()).toEqual(mixedResult);
+  });
+
+  it("clears the stored result when selecting another file", () => {
+    store.setResult(mixedResult);
+    store.selectFile(new File(["nova"], "nova.txt", { type: "text/plain" }));
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({
+      providers: [provideRouter([])],
+    });
+
+    const restored = TestBed.inject(AnalysisStore);
+
+    expect(restored.status()).toBe("empty");
+    expect(restored.result()).toBeNull();
   });
 });

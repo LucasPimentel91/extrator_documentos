@@ -93,6 +93,48 @@ function normalize(value: string): string {
   return value.normalize("NFKC").replace(/\s+/g, " ").trim().toLowerCase();
 }
 
+function normalizeNullableText(value: unknown): unknown {
+  return typeof value === "string" && value.trim().length === 0 ? null : value;
+}
+
+function normalizeAnalyzerOutput(value: unknown): unknown {
+  if (typeof value !== "object" || value === null || !("rules" in value)) {
+    return value;
+  }
+
+  const output = value as Record<string, unknown>;
+  if (!Array.isArray(output.rules)) return value;
+
+  return {
+    ...output,
+    rules: output.rules.map((rule, index) => {
+      if (typeof rule !== "object" || rule === null) return rule;
+
+      const current = rule as Record<string, unknown>;
+      const location =
+        typeof current.location === "object" && current.location !== null
+          ? {
+              ...(current.location as Record<string, unknown>),
+              section: normalizeNullableText(
+                (current.location as Record<string, unknown>).section,
+              ),
+            }
+          : current.location;
+
+      return {
+        ...current,
+        id: `R${String(index + 1).padStart(3, "0")}`,
+        location,
+        subject: normalizeNullableText(current.subject),
+        action: normalizeNullableText(current.action),
+        deadline: normalizeNullableText(current.deadline),
+        condition: normalizeNullableText(current.condition),
+        exception: normalizeNullableText(current.exception),
+      };
+    }),
+  };
+}
+
 export class GeminiRuleAnalyzer implements RuleAnalyzer {
   constructor(
     private readonly transport: GeminiTransport,
@@ -157,7 +199,9 @@ END_UNTRUSTED_DOCUMENT_DATA`;
 
   private parse(raw: string) {
     try {
-      return analyzerOutputSchema.safeParse(JSON.parse(raw));
+      return analyzerOutputSchema.safeParse(
+        normalizeAnalyzerOutput(JSON.parse(raw)),
+      );
     } catch {
       return analyzerOutputSchema.safeParse(null);
     }

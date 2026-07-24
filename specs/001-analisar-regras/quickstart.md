@@ -14,7 +14,7 @@ Create `.env` from `.env.example` and set:
 ```dotenv
 GEMINI_API_KEY=replace-locally
 GEMINI_MODEL=replace-with-supported-model
-PORT=3000
+BACKEND_PORT=3000
 FRONTEND_ORIGIN=http://localhost:4200
 MAX_FILE_SIZE_BYTES=10485760
 GEMINI_TIMEOUT_MS=120000

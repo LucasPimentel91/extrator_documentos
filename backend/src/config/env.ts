@@ -2,7 +2,7 @@ import { z } from "zod";
 
 const environmentSchema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
-  PORT: z.coerce.number().int().positive().max(65_535).default(3000),
+  BACKEND_PORT: z.coerce.number().int().positive().max(65_535).default(3000),
   FRONTEND_ORIGIN: z.url().default("http://localhost:4200"),
   GEMINI_API_KEY: z.string().min(1).optional(),
   GEMINI_MODEL: z.string().min(1).default("replace-with-supported-model"),

@@ -74,7 +74,7 @@ const RECOVERY_MESSAGES: Record<AnalysisErrorCode, RecoveryMessage> = {
   template: `
     <main>
       <h1>Analisador de Regras Institucionais</h1>
-      <form (ngSubmit)="analyze()">
+      <form (submit)="analyzeFromSubmit($event)">
         <app-file-upload
           [disabled]="isBusy"
           (fileSelected)="selectFile($event)"
@@ -217,6 +217,11 @@ export class UploadPageComponent {
     this.file.setValue(file);
     this.store.selectFile(file);
     this.store.setStatus("ready");
+  }
+
+  analyzeFromSubmit(event: SubmitEvent): void {
+    event.preventDefault();
+    void this.analyze();
   }
 
   async analyze(): Promise<void> {

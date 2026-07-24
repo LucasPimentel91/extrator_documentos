@@ -63,4 +63,19 @@ describe("UploadPageComponent", () => {
     } as unknown as DragEvent);
     expect(emitted).toBe(file);
   });
+
+  it("prevents native form submission", () => {
+    const fixture = TestBed.createComponent(UploadPageComponent);
+    const preventDefault = vi.fn();
+    const analyze = vi
+      .spyOn(fixture.componentInstance, "analyze")
+      .mockResolvedValue(undefined);
+
+    fixture.componentInstance.analyzeFromSubmit({
+      preventDefault,
+    } as unknown as SubmitEvent);
+
+    expect(preventDefault).toHaveBeenCalled();
+    expect(analyze).toHaveBeenCalled();
+  });
 });
