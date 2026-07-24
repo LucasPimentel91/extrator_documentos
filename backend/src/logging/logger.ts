@@ -12,6 +12,7 @@ const allowedFields = new Set([
   "model",
   "ruleCount",
   "errorCode",
+  "errorName",
 ]);
 
 export interface Logger {

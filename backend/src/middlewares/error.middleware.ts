@@ -34,6 +34,7 @@ export const errorMiddleware: ErrorRequestHandler = (
     requestId,
     status: 500,
     errorCode: "INTERNAL_ERROR",
+    errorName: error instanceof Error ? error.name : "UnknownError",
   });
   response.status(500).json({
     error: {

@@ -90,51 +90,51 @@ resposta fundamentada ou vazia, ausência de persistência e erros seguros.
 
 ### 4. Extração de texto — testes primeiro
 
-- [ ] T026 [P] [US1] Criar fixtures mínimas válidas, vazias e corrompidas sem conteúdo sensível em `backend/tests/fixtures/documents/`
-- [ ] T027 [P] [US1] Criar testes de extração TXT para UTF-8, BOM, binário e texto vazio em `backend/tests/unit/extractors/txt.extractor.spec.ts`
-- [ ] T028 [P] [US1] Criar testes de extração PDF para texto por página, arquivo corrompido e PDF sem camada textual em `backend/tests/unit/extractors/pdf.extractor.spec.ts`
-- [ ] T029 [P] [US1] Criar testes de extração DOCX para texto, arquivo corrompido e conteúdo sem texto em `backend/tests/unit/extractors/docx.extractor.spec.ts`
-- [ ] T030 [P] [US1] Implementar extrator TXT estrito e normalização preservando evidência em `backend/src/services/extractors/txt.extractor.ts`
-- [ ] T031 [P] [US1] Implementar extrator PDF em memória com localização por página em `backend/src/services/extractors/pdf.extractor.ts`
-- [ ] T032 [P] [US1] Implementar extrator DOCX como texto bruto em `backend/src/services/extractors/docx.extractor.ts`
-- [ ] T033 [US1] Criar testes do registro de extratores e rejeição de conteúdo ilegível em `backend/tests/unit/services/text-extraction.service.spec.ts`
-- [ ] T034 [US1] Implementar seleção por tipo e metadados de texto em `backend/src/services/text-extraction.service.ts`
+- [X] T026 [P] [US1] Criar fixtures mínimas válidas, vazias e corrompidas sem conteúdo sensível em `backend/tests/fixtures/documents/`
+- [X] T027 [P] [US1] Criar testes de extração TXT para UTF-8, BOM, binário e texto vazio em `backend/tests/unit/extractors/txt.extractor.spec.ts`
+- [X] T028 [P] [US1] Criar testes de extração PDF para texto por página, arquivo corrompido e PDF sem camada textual em `backend/tests/unit/extractors/pdf.extractor.spec.ts`
+- [X] T029 [P] [US1] Criar testes de extração DOCX para texto, arquivo corrompido e conteúdo sem texto em `backend/tests/unit/extractors/docx.extractor.spec.ts`
+- [X] T030 [P] [US1] Implementar extrator TXT estrito e normalização preservando evidência em `backend/src/services/extractors/txt.extractor.ts`
+- [X] T031 [P] [US1] Implementar extrator PDF em memória com localização por página em `backend/src/services/extractors/pdf.extractor.ts`
+- [X] T032 [P] [US1] Implementar extrator DOCX como texto bruto em `backend/src/services/extractors/docx.extractor.ts`
+- [X] T033 [US1] Criar testes do registro de extratores e rejeição de conteúdo ilegível em `backend/tests/unit/services/text-extraction.service.spec.ts`
+- [X] T034 [US1] Implementar seleção por tipo e metadados de texto em `backend/src/services/text-extraction.service.ts`
 
 ### 5. Integração com Gemini — testes primeiro
 
-- [ ] T035 [P] [US1] Definir contrato interno e fake determinístico de `RuleAnalyzer` em `backend/src/adapters/rule-analyzer.ts` e `backend/tests/fakes/fake-rule-analyzer.ts`
-- [ ] T036 [P] [US1] Criar testes do adapter para JSON válido, enums, nulos e documento sem regras em `backend/tests/unit/adapters/gemini-rule-analyzer.spec.ts`
-- [ ] T037 [P] [US1] Criar testes de falha para timeout, indisponibilidade, JSON inválido e reparo único em `backend/tests/unit/adapters/gemini-rule-analyzer-errors.spec.ts`
-- [ ] T038 [P] [US1] Criar testes adversariais para instruções no documento, Unicode invisível e tentativa de revelar segredos em `backend/tests/unit/adapters/gemini-prompt-injection.spec.ts`
-- [ ] T039 [P] [US1] Criar testes de grounding para evidência vazia ou ausente do texto original em `backend/tests/unit/adapters/evidence-grounding.spec.ts`
-- [ ] T040 [US1] Implementar prompt delimitado, saída JSON estruturada e modelo configurável em `backend/src/adapters/gemini-rule-analyzer.ts`
-- [ ] T041 [US1] Implementar timeout com `AbortSignal`, reparo estrutural único e mapeamento de falhas em `backend/src/adapters/gemini-rule-analyzer.ts`
-- [ ] T042 [US1] Implementar validação Zod e grounding literal de evidências antes do retorno em `backend/src/adapters/gemini-rule-analyzer.ts`
+- [X] T035 [P] [US1] Definir contrato interno e fake determinístico de `RuleAnalyzer` em `backend/src/adapters/rule-analyzer.ts` e `backend/tests/fakes/fake-rule-analyzer.ts`
+- [X] T036 [P] [US1] Criar testes do adapter para JSON válido, enums, nulos e documento sem regras em `backend/tests/unit/adapters/gemini-rule-analyzer.spec.ts`
+- [X] T037 [P] [US1] Criar testes de falha para timeout, indisponibilidade, JSON inválido e reparo único em `backend/tests/unit/adapters/gemini-rule-analyzer-errors.spec.ts`
+- [X] T038 [P] [US1] Criar testes adversariais para instruções no documento, Unicode invisível e tentativa de revelar segredos em `backend/tests/unit/adapters/gemini-prompt-injection.spec.ts`
+- [X] T039 [P] [US1] Criar testes de grounding para evidência vazia ou ausente do texto original em `backend/tests/unit/adapters/evidence-grounding.spec.ts`
+- [X] T040 [US1] Implementar prompt delimitado, saída JSON estruturada e modelo configurável em `backend/src/adapters/gemini-rule-analyzer.ts`
+- [X] T041 [US1] Implementar timeout com `AbortSignal`, reparo estrutural único e mapeamento de falhas em `backend/src/adapters/gemini-rule-analyzer.ts`
+- [X] T042 [US1] Implementar validação Zod e grounding literal de evidências antes do retorno em `backend/src/adapters/gemini-rule-analyzer.ts`
 
 ### 6. Endpoint de análise — testes primeiro
 
-- [ ] T043 [P] [US1] Criar testes de upload para arquivo ausente, extensão/MIME divergentes, tamanho exato e excesso em `backend/tests/integration/document-upload.spec.ts`
-- [ ] T044 [P] [US1] Criar testes contratuais do endpoint para sucesso, nenhuma regra e invariantes do OpenAPI em `backend/tests/integration/document-analysis.spec.ts`
-- [ ] T045 [P] [US1] Criar testes do endpoint para leitura impossível, IA inválida, indisponibilidade e timeout em `backend/tests/integration/document-analysis-errors.spec.ts`
-- [ ] T046 [US1] Implementar sanitização de nome, assinatura de arquivo e Multer em memória com limites em `backend/src/middlewares/upload.middleware.ts`
-- [ ] T047 [US1] Implementar orquestração extração → análise → resumo → descarte em `backend/src/services/document-analysis.service.ts`
-- [ ] T048 [US1] Implementar controller fino e rota `POST /api/documents/analyze` em `backend/src/controllers/document.controller.ts` e `backend/src/routes/document.routes.ts`
-- [ ] T049 [US1] Registrar rota e ordem final de middlewares no servidor em `backend/src/app.ts`
+- [X] T043 [P] [US1] Criar testes de upload para arquivo ausente, extensão/MIME divergentes, tamanho exato e excesso em `backend/tests/integration/document-upload.spec.ts`
+- [X] T044 [P] [US1] Criar testes contratuais do endpoint para sucesso, nenhuma regra e invariantes do OpenAPI em `backend/tests/integration/document-analysis.spec.ts`
+- [X] T045 [P] [US1] Criar testes do endpoint para leitura impossível, IA inválida, indisponibilidade e timeout em `backend/tests/integration/document-analysis-errors.spec.ts`
+- [X] T046 [US1] Implementar sanitização de nome, assinatura de arquivo e Multer em memória com limites em `backend/src/middlewares/upload.middleware.ts`
+- [X] T047 [US1] Implementar orquestração extração → análise → resumo → descarte em `backend/src/services/document-analysis.service.ts`
+- [X] T048 [US1] Implementar controller fino e rota `POST /api/documents/analyze` em `backend/src/controllers/document.controller.ts` e `backend/src/routes/document.routes.ts`
+- [X] T049 [US1] Registrar rota e ordem final de middlewares no servidor em `backend/src/app.ts`
 
 ### 8. Tela de upload — testes primeiro
 
-- [ ] T050 [P] [US1] Criar testes do formulário para nenhum arquivo, drag-and-drop, tipos, limite e clique duplicado em `frontend/src/app/features/upload/upload-page.component.spec.ts`
-- [ ] T051 [P] [US1] Criar testes dos estados acessíveis de envio e análise em `frontend/src/app/features/upload/analysis-progress.component.spec.ts`
-- [ ] T052 [US1] Implementar área acessível de seleção/arraste e Reactive Form em `frontend/src/app/features/upload/file-upload.component.ts` e `frontend/src/app/features/upload/upload-page.component.ts`
-- [ ] T053 [P] [US1] Implementar componente de progresso com anúncios de estado em `frontend/src/app/features/upload/analysis-progress.component.ts`
-- [ ] T054 [US1] Integrar validação preliminar e bloqueio de submissão duplicada ao store em `frontend/src/app/features/upload/upload-page.component.ts`
+- [X] T050 [P] [US1] Criar testes do formulário para nenhum arquivo, drag-and-drop, tipos, limite e clique duplicado em `frontend/src/app/features/upload/upload-page.component.spec.ts`
+- [X] T051 [P] [US1] Criar testes dos estados acessíveis de envio e análise em `frontend/src/app/features/upload/analysis-progress.component.spec.ts`
+- [X] T052 [US1] Implementar área acessível de seleção/arraste e Reactive Form em `frontend/src/app/features/upload/file-upload.component.ts` e `frontend/src/app/features/upload/upload-page.component.ts`
+- [X] T053 [P] [US1] Implementar componente de progresso com anúncios de estado em `frontend/src/app/features/upload/analysis-progress.component.ts`
+- [X] T054 [US1] Integrar validação preliminar e bloqueio de submissão duplicada ao store em `frontend/src/app/features/upload/upload-page.component.ts`
 
 ### 10. Integração frontend-backend — testes primeiro
 
-- [ ] T055 [P] [US1] Criar testes HTTP para multipart, resultado, erros tipados e `requestId` em `frontend/src/app/core/services/analysis-api.service.spec.ts`
-- [ ] T056 [P] [US1] Criar teste do interceptor para envelopes conhecidos e falha desconhecida em `frontend/src/app/core/interceptors/api-error.interceptor.spec.ts`
-- [ ] T057 [US1] Implementar envio multipart e consumo dos contratos em `frontend/src/app/core/services/analysis-api.service.ts`
-- [ ] T058 [US1] Conectar API, store e progresso e renderizar total/lista mínima em `/resultado` em `frontend/src/app/features/upload/upload-page.component.ts` e `frontend/src/app/features/result/result-page.component.ts`
+- [X] T055 [P] [US1] Criar testes HTTP para multipart, resultado, erros tipados e `requestId` em `frontend/src/app/core/services/analysis-api.service.spec.ts`
+- [X] T056 [P] [US1] Criar teste do interceptor para envelopes conhecidos e falha desconhecida em `frontend/src/app/core/interceptors/api-error.interceptor.spec.ts`
+- [X] T057 [US1] Implementar envio multipart e consumo dos contratos em `frontend/src/app/core/services/analysis-api.service.ts`
+- [X] T058 [US1] Conectar API, store e progresso e renderizar total/lista mínima em `/resultado` em `frontend/src/app/features/upload/upload-page.component.ts` e `frontend/src/app/features/result/result-page.component.ts`
 
 **Checkpoint**: US1 funciona ponta a ponta e pode ser demonstrada sem componentes detalhados de
 resultado: contrato válido, total e estado final ficam disponíveis no store.
@@ -150,13 +150,13 @@ localização/nulos, confiança e aviso jurídico sem nova chamada.
 
 ### 9. Tela de resultado — testes primeiro
 
-- [ ] T059 [P] [US2] Criar testes do resumo para total, revisão obrigatória e zero regras em `frontend/src/app/features/result/result-summary.component.spec.ts`
-- [ ] T060 [P] [US2] Criar testes do card para evidência, localização, campos nulos, confiança e tipos em `frontend/src/app/features/result/rule-card.component.spec.ts`
-- [ ] T061 [P] [US2] Criar testes do aviso humano/jurídico e navegação direta sem estado em `frontend/src/app/features/result/result-page.component.spec.ts`
-- [ ] T062 [P] [US2] Implementar resumo e estado sem regras em `frontend/src/app/features/result/result-summary.component.ts`
-- [ ] T063 [P] [US2] Implementar card acessível com todos os campos do contrato em `frontend/src/app/features/result/rule-card.component.ts`
-- [ ] T064 [P] [US2] Implementar aviso reutilizável de revisão humana em `frontend/src/app/shared/components/human-review-notice.component.ts`
-- [ ] T065 [US2] Implementar página de resultados, lista por IDs estáveis e redirect sem estado em `frontend/src/app/features/result/result-page.component.ts`
+- [X] T059 [P] [US2] Criar testes do resumo para total, revisão obrigatória e zero regras em `frontend/src/app/features/result/result-summary.component.spec.ts`
+- [X] T060 [P] [US2] Criar testes do card para evidência, localização, campos nulos, confiança e tipos em `frontend/src/app/features/result/rule-card.component.spec.ts`
+- [X] T061 [P] [US2] Criar testes do aviso humano/jurídico e navegação direta sem estado em `frontend/src/app/features/result/result-page.component.spec.ts`
+- [X] T062 [P] [US2] Implementar resumo e estado sem regras em `frontend/src/app/features/result/result-summary.component.ts`
+- [X] T063 [P] [US2] Implementar card acessível com todos os campos do contrato em `frontend/src/app/features/result/rule-card.component.ts`
+- [X] T064 [P] [US2] Implementar aviso reutilizável de revisão humana em `frontend/src/app/shared/components/human-review-notice.component.ts`
+- [X] T065 [US2] Implementar página de resultados, lista por IDs estáveis e redirect sem estado em `frontend/src/app/features/result/result-page.component.ts`
 
 **Checkpoint**: US2 exibe cada resultado fundamentado e sinaliza incerteza/ausência sem inventar
 dados.

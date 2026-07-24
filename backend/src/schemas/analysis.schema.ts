@@ -33,6 +33,10 @@ export const ruleSchema = z.strictObject({
   requiresHumanReview: z.boolean(),
 });
 
+export const analyzerOutputSchema = z.strictObject({
+  rules: z.array(ruleSchema),
+});
+
 export const analysisResultSchema = z
   .strictObject({
     document: z.strictObject({
